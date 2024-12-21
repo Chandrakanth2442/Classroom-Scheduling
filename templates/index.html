@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scheduling Algorithms</title>
+
+    <style>
+      /* General Styles */
+      body {
+        background-color: #f0f4f8;
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* Centered container */
+      .container {
+        text-align: center;
+        background-color: #ffffff;
+        padding: 40px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        width: 80%;
+        max-width: 600px;
+      }
+
+      h1 {
+        color: #2e1a47;
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        margin: 15px 0;
+      }
+
+      /* Button Styles */
+      button {
+        background-color: #2e1a47;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s;
+      }
+
+      button:hover {
+        background-color: #4a2f69;
+        transform: translateY(-3px);
+      }
+
+      button:active {
+        transform: translateY(1px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        button {
+          width: 100%;
+          font-size: 1rem;
+        }
+      }
+    </style>
+
+    <script>
+      // Function to send AJAX request to run the selected algorithm
+      function runAlgorithm(algorithm) {
+        fetch(`/run/${algorithm}`, { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              alert(data.message); // Show success message
+            } else {
+              alert("Error: " + data.message); // Show error message
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Something went wrong!");
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Select an Algorithm to Run</h1>
+      <ul>
+        <li><button onclick="runAlgorithm('aco')">Run ACO</button></li>
+        <li>
+          <button onclick="runAlgorithm('bb')">Run Branch and Bound</button>
+        </li>
+        <li>
+          <button onclick="runAlgorithm('cp')">
+            Run Constraint Processing
+          </button>
+        </li>
+        <li>
+          <button onclick="runAlgorithm('simulated_annealing')">
+            Run Simulated Annealing
+          </button>
+        </li>
+        <li>
+          <button onclick="runAlgorithm('tabu_search')">Run Tabu Search</button>
+        </li>
+        <li>
+          <button onclick="runAlgorithm('genetic')">
+            Run Genetic Algorithm
+          </button>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
